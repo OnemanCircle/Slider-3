@@ -1,123 +1,125 @@
+/* Cyberpunk purple neon background */
 body {
-  background: radial-gradient(circle, #7d00b9, #0a0040); /* Cyberpunk purple gradient */
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Prevent horizontal scroll */
+    background: radial-gradient(circle, #7d00b9, #0a0040);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-#main {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+/* Main page section with background */
+#main-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
 }
 
+/* Centered button container */
 #button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px; /* Space between buttons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Space between buttons */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.neon-text {
-  font-size: 48px;
-  color: #fff;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px #ff0088, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff0088, 0 0 50px #ff00ff;
-}
-
+/* Button styles */
 .button {
-  background-color: transparent;
-  border: 2px solid #ff0088;
-  color: #fff;
-  padding: 20px 50px;
-  font-size: 20px;
-  text-transform: uppercase;
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #ff0088, 0 0 20px #ff00ff;
-  transition: 0.3s ease;
+    background-color: transparent;
+    border: 2px solid #ff0088;
+    color: #fff;
+    padding: 20px 50px;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff0088, 0 0 20px #ff00ff;
+    transition: 0.3s ease;
 }
 
 .button:hover {
-  background-color: #ff0088;
-  color: #000;
+    background-color: #ff0088;
+    color: #000;
 }
 
 .subsection-button {
-  background-color: transparent;
-  border: 2px solid #ff00ff;
-  color: #fff;
-  padding: 10px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin: 10px;
-  box-shadow: 0 0 10px #ff00ff;
-  transition: 0.3s ease;
+    background-color: transparent;
+    border: 2px solid #ff00ff;
+    color: #fff;
+    padding: 10px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 0 0 10px #ff00ff;
+    transition: 0.3s ease;
 }
 
 .subsection-button:hover {
-  background-color: #ff00ff;
-  color: #000;
+    background-color: #ff00ff;
+    color: #000;
 }
 
+/* Gallery section styles */
 .gallery {
-  display: none;
-  text-align: center;
-  margin-top: 30px;
-  color: #fff;
+    display: none;
+    text-align: center;
+    margin-top: 30px;
+    color: #fff;
 }
 
 #gallery-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #gallery-content {
-  position: relative;
-  background: #222;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 80%;
+    position: relative;
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 80%;
 }
 
 #close-modal {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 36px;
-  cursor: pointer;
-  color: #fff;
-  transition: 0.3s;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 36px;
+    cursor: pointer;
+    color: #fff;
 }
 
 #close-modal:hover {
-  color: #ff0088;
+    color: #ff0088;
 }
 
 #gallery-images {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .gallery-image {
-  width: 200px;
-  margin: 10px;
-  transition: 0.3s ease;
+    width: 200px;
+    margin: 10px;
+    transition: 0.3s ease;
 }
 
 .gallery-image:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }

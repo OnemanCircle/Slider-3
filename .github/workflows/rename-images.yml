@@ -1,0 +1,51 @@
+name: Rename Images
+
+on:
+  workflow_dispatch:
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Rename images in each subsection
+        run: |
+          find images -mindepth 2 -type d | while IFS= read -r dir; do
+            echo "Processing $dir"
+            cd "$dir"
+
+            jpg_count=$(find . -maxdepth 1 -type f -iname '*.jpg' | wc -l)
+
+            if [ "$jpg_count" -eq 0 ]; then
+              echo "No .jpg images in $dir"
+              cd - > /dev/null
+              continue
+            fi
+
+            # Create temp dir to avoid overwriting issues
+            mkdir temp_rename
+            count=1
+
+            find . -maxdepth 1 -type f -iname '*.jpg' | sort | while IFS= read -r img; do
+              cp "$img" "temp_rename/${count}.jpg"
+              count=$((count + 1))
+            done
+
+            # Remove old files and move renamed
+            rm -f ./*.jpg
+            mv temp_rename/*.jpg .
+            rmdir temp_rename
+
+            cd - > /dev/null
+          done
+
+      - name: Commit renamed images
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add images/
+          git commit -m "Renamed all .jpg images in each subsection"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/OnemanCircle/Slider-3.git HEAD:main || echo "No changes to commit"

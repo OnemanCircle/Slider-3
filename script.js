@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const subsectionContainer = document.getElementById("subsection-buttons");
   const galleryContainer = document.getElementById("gallery");
 
-  // Structure with section names and their subsections
   const structure = {
     Cars: ["Bugatti Chiron", "Koenigsegg Jesko", "Veneno Roadster"],
     Games: ["Arknights", "Dead By Daylight", "Genshin Impact", "Pubg Mobile", "Wuthering Waves"],
@@ -16,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("data.json");
     imageCounts = await response.json();
-    console.log("Loaded data:", imageCounts);  // Check if the data is loaded correctly
+    console.log("Loaded data:", imageCounts);  // Log the loaded data
   } catch (e) {
     console.error("Failed to load image count data:", e);
   }
@@ -25,16 +24,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   mainButtons.forEach(button => {
     button.addEventListener("click", () => {
       const section = button.getAttribute("data-section");
-      subsectionContainer.innerHTML = "";
+      subsectionContainer.innerHTML = "";  // Clear previous buttons
 
       // Generate subsection buttons based on image count
       structure[section].forEach(sub => {
         const count = imageCounts[section]?.[sub] || 0;
         const subBtn = document.createElement("button");
-        subBtn.textContent = `${sub} (${count})`;
+        subBtn.textContent = `${sub} (${count})`;  // Display section name and image count
         subBtn.classList.add("subsection-button");
-        subBtn.addEventListener("click", () => showGallery(section, sub));
-        subsectionContainer.appendChild(subBtn);
+
+        subBtn.addEventListener("click", () => showGallery(section, sub));  // Show gallery on click
+        subsectionContainer.appendChild(subBtn);  // Add button to the container
       });
 
       galleryContainer.innerHTML = ""; // Clear gallery when changing sections
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Function to display images in the gallery for each subsection
   function showGallery(section, subsection) {
-    galleryContainer.innerHTML = "";
+    galleryContainer.innerHTML = ""; // Clear gallery before adding new images
     const count = imageCounts[section]?.[subsection] || 0;
 
     for (let i = 1; i <= count; i++) {
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       img.alt = `${subsection} ${i}`;
       img.classList.add("gallery-image");
 
-      img.onerror = () => img.remove(); // Remove image if it fails to load
+      img.onerror = () => img.remove();  // Remove image if it fails to load
 
       // On click, open image in fullscreen
       img.addEventListener("click", () => openFullscreen(img.src));

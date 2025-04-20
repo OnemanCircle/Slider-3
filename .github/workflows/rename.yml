@@ -1,0 +1,38 @@
+name: Rename Images
+
+on:
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Rename images in all subsections
+        run: |
+          find images -type d | while read dir; do
+            if [ "$dir" != "images" ]; then
+              echo "Processing: $dir"
+              cd "$dir"
+              count=1
+              for img in $(ls *.jpg 2>/dev/null | sort); do
+                if [ "$count" -le 100 ]; then
+                  newname="${count}.jpg"
+                  mv -f "$img" "$newname"
+                  count=$((count+1))
+                fi
+              done
+              cd - > /dev/null
+            fi
+          done
+
+      - name: Commit renamed images
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add images/
+          git commit -m 'Rename images in each subsection from 1 to 100'
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/OnemanCircle/Slider-3.git HEAD:main

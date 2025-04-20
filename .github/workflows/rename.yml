@@ -1,0 +1,7 @@
+- name: Flatten nested images/images structure if needed
+        run: |
+          if [ -d "images/images" ]; then
+            echo "Flattening nested structure..."
+            mv images/images/* images/
+            rm -rf images/images
+          fi

@@ -1,31 +1,58 @@
-function openSection(section) {
-  // Hide all sections
-  document.querySelectorAll('.gallery').forEach((el) => {
-    el.style.display = 'none';
+document.addEventListener("DOMContentLoaded", () => {
+  const mainButtons = document.querySelectorAll(".main-button");
+  const subsectionContainer = document.getElementById("subsection-buttons");
+  const galleryContainer = document.getElementById("gallery");
+
+  const structure = {
+    Cars: ["Bugatti Chiron", "Koenigsegg Jesko", "Veneno Roadster"],
+    Games: ["Arknights", "Dead By Daylight", "Genshin Impact", "Pubg Mobile", "Wuthering Waves"],
+    Girls: ["Anastasia Bezrukova", "Barbra Palvin", "Elina Karimova", "Kristina Pimenova", "McKenna Grace"]
+  };
+
+  mainButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const section = button.getAttribute("data-section");
+      subsectionContainer.innerHTML = "";
+
+      structure[section].forEach(sub => {
+        const subBtn = document.createElement("button");
+        subBtn.textContent = sub;
+        subBtn.classList.add("subsection-button");
+        subBtn.addEventListener("click", () => showGallery(section, sub));
+        subsectionContainer.appendChild(subBtn);
+      });
+
+      galleryContainer.innerHTML = "";
+    });
   });
 
-  // Show the selected section
-  document.getElementById(`${section}-gallery`).style.display = 'block';
-}
+  function showGallery(section, subsection) {
+    galleryContainer.innerHTML = "";
 
-function openSubsection(subsection) {
-  // Open the gallery modal
-  document.getElementById('gallery-modal').style.display = 'flex';
+    for (let i = 1; i <= 100; i++) {
+      const img = document.createElement("img");
+      img.src = `images/${section}/${subsection}/${i}.jpg`;
+      img.alt = `${subsection} ${i}`;
+      img.classList.add("gallery-image");
 
-  // Generate image gallery dynamically for the subsection
-  const images = [];
-  for (let i = 1; i <= 100; i++) {
-    images.push(`${i}.jpg`);
+      img.onerror = () => img.remove();
+
+      img.addEventListener("click", () => openFullscreen(img.src));
+      galleryContainer.appendChild(img);
+    }
   }
 
-  // Set gallery images based on subsection
-  const galleryHTML = images.map(img => {
-    return `<img src="images/${subsection}/${img}" alt="${subsection} ${img}" class="gallery-image">`;
-  }).join('');
+  function openFullscreen(src) {
+    const overlay = document.createElement("div");
+    overlay.classList.add("fullscreen-overlay");
 
-  document.getElementById('gallery-images').innerHTML = galleryHTML;
-}
+    const fullImg = document.createElement("img");
+    fullImg.src = src;
+    fullImg.classList.add("fullscreen-img");
 
-function closeModal() {
-  document.getElementById('gallery-modal').style.display = 'none';
-}
+    overlay.appendChild(fullImg);
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener("click", () => overlay.remove());
+  }
+});

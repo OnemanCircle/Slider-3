@@ -1,56 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery Slider</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyberpunk Gallery</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="gallery-container">
+    <!-- Section Titles and Image Cards -->
+    <!-- Images will be inserted by JavaScript -->
+  </div>
 
-    <!-- Main Page Background -->
-    <div id="main-page">
-        <!-- Centered Buttons -->
-        <div id="button-container">
-            <button class="button" onclick="openSection('cars')">Cars</button>
-            <button class="button" onclick="openSection('games')">Games</button>
-            <button class="button" onclick="openSection('girls')">Girls</button>
-        </div>
-    </div>
-
-    <!-- Section for Cars -->
-    <div id="cars-gallery" class="gallery">
-        <button class="subsection-button" onclick="openSubsection('Bugatti Chiron')">Bugatti Chiron</button>
-        <button class="subsection-button" onclick="openSubsection('Koenigsegg Jesko')">Koenigsegg Jesko</button>
-        <button class="subsection-button" onclick="openSubsection('Veneno Roadster')">Veneno Roadster</button>
-    </div>
-
-    <!-- Section for Games -->
-    <div id="games-gallery" class="gallery">
-        <button class="subsection-button" onclick="openSubsection('Arknights')">Arknights</button>
-        <button class="subsection-button" onclick="openSubsection('Dead By Daylight')">Dead By Daylight</button>
-        <button class="subsection-button" onclick="openSubsection('Genshin Impact')">Genshin Impact</button>
-        <button class="subsection-button" onclick="openSubsection('Pubg Mobile')">Pubg Mobile</button>
-        <button class="subsection-button" onclick="openSubsection('Wuthering Waves')">Wuthering Waves</button>
-    </div>
-
-    <!-- Section for Girls -->
-    <div id="girls-gallery" class="gallery">
-        <button class="subsection-button" onclick="openSubsection('Anastasia Bezrukova')">Anastasia Bezrukova</button>
-        <button class="subsection-button" onclick="openSubsection('Barbra Palvin')">Barbra Palvin</button>
-        <button class="subsection-button" onclick="openSubsection('Elina Karimova')">Elina Karimova</button>
-        <button class="subsection-button" onclick="openSubsection('Kristina Pimenova')">Kristina Pimenova</button>
-        <button class="subsection-button" onclick="openSubsection('McKenna Grace')">McKenna Grace</button>
-    </div>
-
-    <!-- Gallery Modal -->
-    <div id="gallery-modal" style="display: none;">
-        <div id="gallery-content">
-            <span id="close-modal" onclick="closeModal()">×</span>
-            <div id="gallery-images"></div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

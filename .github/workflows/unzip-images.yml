@@ -14,13 +14,13 @@ jobs:
       - name: List all files in the repository for debugging
         run: ls -R
 
-      - name: Ensure uploads/images.zip exists
+      - name: Ensure images.zip exists
         run: |
-          if [ ! -f uploads/images.zip ]; then
-            echo "ERROR: uploads/images.zip does not exist!"
+          if [ ! -f images.zip ]; then
+            echo "ERROR: images.zip does not exist!"
             exit 1
           else
-            echo "Found uploads/images.zip"
+            echo "Found images.zip"
           fi
 
       - name: Create images directory if not exists
@@ -28,11 +28,11 @@ jobs:
 
       - name: Unzip images.zip to images/
         run: |
-          if [ -f uploads/images.zip ]; then
+          if [ -f images.zip ]; then
             echo "Unzipping images.zip into images/"
-            unzip -o uploads/images.zip -d images/
+            unzip -o images.zip -d images/
           else
-            echo "ERROR: uploads/images.zip not found"
+            echo "ERROR: images.zip not found"
             exit 1
           fi
 

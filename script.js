@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("data.json");
     imageCounts = await response.json();
+    console.log("Loaded data:", imageCounts);  // Check if the data is loaded correctly
   } catch (e) {
     console.error("Failed to load image count data:", e);
   }

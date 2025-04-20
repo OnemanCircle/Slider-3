@@ -1,36 +1,54 @@
-const sections = [
-  "Anastasia Bezrukova", "Barbra Palvin", "Bugatti Chiron", "Dead By Daylight",
-  "Elina Karimova", "Genshin Impact", "Koeniesegg Jesko", "Kristina Pimenova",
-  "McKenna Grace", "Pubg Mobile", "Venono Roadster", "Wuthering Waves"
-];
+// script.js - Interactivity for Image Gallery
 
-const container = document.querySelector(".gallery-container");
+document.addEventListener('DOMContentLoaded', () => {
 
-sections.sort().forEach(section => {
-  const sectionDiv = document.createElement("div");
-  sectionDiv.className = "section";
+  // Image Modal functionality
+  const imageCards = document.querySelectorAll('.image-card');
+  const modal = document.createElement('div');
+  const modalImage = document.createElement('img');
+  modal.classList.add('modal');
+  modalImage.classList.add('modal-image');
+  modal.appendChild(modalImage);
+  document.body.appendChild(modal);
 
-  const title = document.createElement("div");
-  title.className = "section-title";
-  title.textContent = section;
-  sectionDiv.appendChild(title);
+  imageCards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Show modal with the clicked image
+      const imageSrc = card.querySelector('img').src;
+      modalImage.src = imageSrc;
+      modal.style.display = 'block';
+    });
+  });
 
-  const grid = document.createElement("div");
-  grid.className = "image-grid";
+  // Close the modal when clicked
+  modal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
 
-  for (let i = 1; i <= 20; i++) {
-    const imgPath = `images/${section}/${i}.jpg`;
-    const card = document.createElement("div");
-    card.className = "image-card";
+  // Image hover glow effect
+  const gridImages = document.querySelectorAll('.image-card img');
+  gridImages.forEach(image => {
+    image.addEventListener('mouseenter', () => {
+      image.style.opacity = 0.8;
+    });
+    image.addEventListener('mouseleave', () => {
+      image.style.opacity = 1;
+    });
+  });
 
-    const img = document.createElement("img");
-    img.src = imgPath;
-    img.alt = `${section} ${i}`;
+  // Smooth Scroll effect when clicking on any anchor link
+  const scrollLinks = document.querySelectorAll('a[href^="#"]');
+  scrollLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 
-    card.appendChild(img);
-    grid.appendChild(card);
-  }
+  // Auto close modal when clicked outside the image
+  modalImage.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
 
-  sectionDiv.appendChild(grid);
-  container.appendChild(sectionDiv);
 });

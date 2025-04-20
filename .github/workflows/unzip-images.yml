@@ -1,7 +1,7 @@
 name: Unzip Images
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:  # Manually triggered
 
 jobs:
   unzip:
@@ -11,11 +11,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: List all files for debug
+        run: ls -R
+
       - name: Create images directory if not exists
         run: mkdir -p images
 
-      - name: Unzip images.zip to images/
-        run: unzip uploads/images.zip -d images/
+      - name: Safely unzip images.zip to images/
+        run: |
+          if [ -f uploads/images.zip ]; then
+            echo "Unzipping images.zip into images/"
+            unzip uploads/images.zip -d images/
+          else
+            echo "ERROR: uploads/images.zip not found"
+            exit 1
+          fi
 
       - name: Commit unzipped images
         run: |

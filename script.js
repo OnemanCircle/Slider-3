@@ -11,12 +11,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let imageCounts = {};
 
-  // Load the data.json file with counts
+  // Load image count from data.json
   try {
     const response = await fetch("data.json");
     imageCounts = await response.json();
   } catch (e) {
-    console.error("Failed to load data.json:", e);
+    console.error("Failed to load image count data:", e);
   }
 
   mainButtons.forEach(button => {
@@ -43,9 +43,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     for (let i = 1; i <= count; i++) {
       const img = document.createElement("img");
-      const encodedSection = encodeURIComponent(section);
-      const encodedSub = encodeURIComponent(subsection);
-      img.src = `images/${encodedSection}/${encodedSub}/${i}.jpg`;
+      const path = `images/${encodeURIComponent(section)}/${encodeURIComponent(subsection)}/${i}.jpg`;
+      img.src = path;
       img.alt = `${subsection} ${i}`;
       img.classList.add("gallery-image");
 

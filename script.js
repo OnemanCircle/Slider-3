@@ -1,74 +1,44 @@
-// Toggle sections
-const sectionButtons = document.querySelectorAll('.glow-button');
-sectionButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    document.querySelectorAll('.section-block').forEach(section => section.classList.add('hidden'));
-    const target = button.getAttribute('data-target');
-    document.getElementById(target).classList.remove('hidden');
-  });
-});
-
-// Toggle subsections
-const subButtons = document.querySelectorAll('.sub-glow-button');
-subButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const parentSection = button.closest('.section-block');
-    parentSection.querySelectorAll('.subsection').forEach(sub => sub.classList.add('hidden'));
-    const subId = button.getAttribute('data-sub');
-    const subElement = parentSection.querySelector(`#${CSS.escape(subId)}`);
-    subElement.classList.remove('hidden');
-    loadImages(subId, subElement.querySelector('.grid'));
-  });
-});
-
-// Load image counts
-fetch('data.json')
-  .then(res => res.json())
-  .then(data => {
-    document.querySelectorAll('.count').forEach(span => {
-      const section = span.getAttribute('data-section');
-      const sub = span.getAttribute('data-sub');
-      span.textContent = data?.[section]?.[sub] || 0;
-    });
+function openSection(section) {
+  // Hide all sections
+  document.querySelectorAll('.gallery').forEach((el) => {
+    el.style.display = 'none';
   });
 
-// Load images
-function loadImages(subsection, container) {
-  container.innerHTML = '';
-  fetch('data.json')
-    .then(res => res.json())
-    .then(data => {
-      const count = data?.[Object.keys(data).find(sec => data[sec][subsection])]?.[subsection] || 0;
-      for (let i = 1; i <= count; i++) {
-        const img = document.createElement('img');
-        img.src = `images/${subsection}/${i}.jpg`;
-        img.alt = subsection;
-        img.className = 'gallery-img';
-        img.addEventListener('click', () => openFullscreen(img.src));
-        container.appendChild(img);
-      }
-    });
+  // Show the selected section
+  document.getElementById(`${section}-gallery`).style.display = 'block';
 }
 
-// Fullscreen view
-const fullscreen = document.getElementById('fullscreen-view');
-const focusedImg = document.getElementById('focused-img');
-document.getElementById('close-view').addEventListener('click', () => {
-  fullscreen.classList.add('hidden');
-  focusedImg.src = '';
-  document.body.style.overflow = 'auto';
-});
+function openSubsection(subsection) {
+  // Open the gallery modal
+  document.getElementById('gallery-modal').style.display = 'flex';
 
-function openFullscreen(src) {
-  focusedImg.src = src;
-  fullscreen.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+  // Set gallery images based on subsection
+  const galleryImages = {
+    bugatti: ['1.jpg', '2.jpg', '3.jpg'],
+    koenigsegg: ['1.jpg', '2.jpg', '3.jpg'],
+    veneno: ['1.jpg', '2.jpg', '3.jpg'],
+    arknights: ['1.jpg', '2.jpg', '3.jpg'],
+    deadbydaylight: ['1.jpg', '2.jpg', '3.jpg'],
+    genshin: ['1.jpg', '2.jpg', '3.jpg'],
+    pubg: ['1.jpg', '2.jpg', '3.jpg'],
+    wuthering: ['1.jpg', '2.jpg', '3.jpg'],
+    anastasia: ['1.jpg', '2.jpg', '3.jpg'],
+    barbra: ['1.jpg', '2.jpg', '3.jpg'],
+    elina: ['1.jpg', '2.jpg', '3.jpg'],
+    kristina: ['1.jpg', '2.jpg', '3.jpg'],
+    mckenna: ['1.jpg', '2.jpg', '3.jpg']
+  };
+
+  const images = galleryImages[subsection];
+
+  let galleryHTML = '';
+  images.forEach(img => {
+    galleryHTML += `<img src="images/${subsection}/${img}" alt="${subsection}">`;
+  });
+
+  document.getElementById('gallery-images').innerHTML = galleryHTML;
 }
 
-fullscreen.addEventListener('click', (e) => {
-  if (e.target.id === 'fullscreen-view') {
-    fullscreen.classList.add('hidden');
-    focusedImg.src = '';
-    document.body.style.overflow = 'auto';
-  }
-});
+function closeModal() {
+  document.getElementById('gallery-modal').style.display = 'none';
+}

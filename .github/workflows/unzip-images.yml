@@ -1,0 +1,43 @@
+name: Unzip Images
+
+on:
+  workflow_dispatch:  # Manual trigger for the workflow
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python for unzip
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install unzip tool
+        run: sudo apt-get install unzip
+
+      - name: Unzip images.zip
+        run: |
+          # Create the 'images' folder if it doesn't exist
+          mkdir -p images
+          
+          # Unzip images.zip to the 'images' folder
+          unzip images.zip -d images/
+
+      - name: Commit unzipped files
+        run: |
+          # Set up git config with a user for commits
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+
+          # Add all unzipped files to git
+          git add images/
+          
+          # Commit the changes
+          git commit -m 'Unzip images.zip and add new image files'
+
+          # Push the changes to the repository
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/OnemanCircle/Slider-3.git HEAD:main

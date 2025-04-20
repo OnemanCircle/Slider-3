@@ -112,12 +112,12 @@ body {
   justify-content: center;
 }
 
-#gallery-images img {
+.gallery-image {
   width: 200px;
   margin: 10px;
   transition: 0.3s ease;
 }
 
-#gallery-images img:hover {
+.gallery-image:hover {
   transform: scale(1.1);
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golden Glow Gallery</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body class="neon-bg">
+  <header class="top-bar">
+    <h1>GOLDEN GLOW GALLERY</h1>
+  </header>  <div class="section-buttons">
+    <button class="glow-button" data-target="Cars">Cars</button>
+    <button class="glow-button" data-target="Games">Games</button>
+    <button class="glow-button" data-target="Girls">Girls</button>
+  </div>  <main id="gallery">
+    <!-- Sections are hidden until buttons are clicked --><section class="section-block hidden" id="Cars">
+  <h2 class="section-title">Cars</h2>
+  <div class="subsection-buttons">
+    <button class="sub-glow-button" data-sub="Bugatti Chiron">Bugatti Chiron</button>
+    <button class="sub-glow-button" data-sub="Koeniesegg Jesko">Koeniesegg Jesko</button>
+    <button class="sub-glow-button" data-sub="Venono Roadster">Venono Roadster</button>
+  </div>
+  <div class="subsection hidden" id="Bugatti Chiron"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Koeniesegg Jesko"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Venono Roadster"><div class="grid"></div></div>
+</section>
+
+<section class="section-block hidden" id="Games">
+  <h2 class="section-title">Games</h2>
+  <div class="subsection-buttons">
+    <button class="sub-glow-button" data-sub="Arknights">Arknights</button>
+    <button class="sub-glow-button" data-sub="Dead By Daylight">Dead By Daylight</button>
+    <button class="sub-glow-button" data-sub="Genshin Impact">Genshin Impact</button>
+    <button class="sub-glow-button" data-sub="Pubg Mobile">Pubg Mobile</button>
+    <button class="sub-glow-button" data-sub="Wuthering Waves">Wuthering Waves</button>
+  </div>
+  <div class="subsection hidden" id="Arknights"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Dead By Daylight"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Genshin Impact"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Pubg Mobile"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Wuthering Waves"><div class="grid"></div></div>
+</section>
+
+<section class="section-block hidden" id="Girls">
+  <h2 class="section-title">Girls</h2>
+  <div class="subsection-buttons">
+    <button class="sub-glow-button" data-sub="Anastasia Bezrukova">Anastasia Bezrukova</button>
+    <button class="sub-glow-button" data-sub="Barbra Palvin">Barbra Palvin</button>
+    <button class="sub-glow-button" data-sub="Elina Karimova">Elina Karimova</button>
+    <button class="sub-glow-button" data-sub="Kristina Pimenova">Kristina Pimenova</button>
+    <button class="sub-glow-button" data-sub="McKenna Grace">McKenna Grace</button>
+  </div>
+  <div class="subsection hidden" id="Anastasia Bezrukova"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Barbra Palvin"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Elina Karimova"><div class="grid"></div></div>
+  <div class="subsection hidden" id="Kristina Pimenova"><div class="grid"></div></div>
+  <div class="subsection hidden" id="McKenna Grace"><div class="grid"></div></div>
+</section>
+
+  </main>  <div id="fullscreen-view" class="hidden">
+    <button id="close-view">×</button>
+    <img id="focused-img" />
+  </div>  <script src="assets/script.js"></script></body>
+</html>

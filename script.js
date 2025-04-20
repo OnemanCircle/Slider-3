@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const subsectionContainer = document.getElementById("subsection-buttons");
   const galleryContainer = document.getElementById("gallery");
 
+  // Structure with section names and their subsections
   const structure = {
     Cars: ["Bugatti Chiron", "Koenigsegg Jesko", "Veneno Roadster"],
     Games: ["Arknights", "Dead By Daylight", "Genshin Impact", "Pubg Mobile", "Wuthering Waves"],
@@ -19,11 +20,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Failed to load image count data:", e);
   }
 
+  // Event listeners for each main button (Cars, Games, Girls)
   mainButtons.forEach(button => {
     button.addEventListener("click", () => {
       const section = button.getAttribute("data-section");
       subsectionContainer.innerHTML = "";
 
+      // Generate subsection buttons based on image count
       structure[section].forEach(sub => {
         const count = imageCounts[section]?.[sub] || 0;
         const subBtn = document.createElement("button");
@@ -33,10 +36,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         subsectionContainer.appendChild(subBtn);
       });
 
-      galleryContainer.innerHTML = "";
+      galleryContainer.innerHTML = ""; // Clear gallery when changing sections
     });
   });
 
+  // Function to display images in the gallery for each subsection
   function showGallery(section, subsection) {
     galleryContainer.innerHTML = "";
     const count = imageCounts[section]?.[subsection] || 0;
@@ -48,13 +52,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       img.alt = `${subsection} ${i}`;
       img.classList.add("gallery-image");
 
-      img.onerror = () => img.remove();
+      img.onerror = () => img.remove(); // Remove image if it fails to load
 
+      // On click, open image in fullscreen
       img.addEventListener("click", () => openFullscreen(img.src));
       galleryContainer.appendChild(img);
     }
   }
 
+  // Function to open image in fullscreen view
   function openFullscreen(src) {
     const overlay = document.createElement("div");
     overlay.classList.add("fullscreen-overlay");
@@ -66,6 +72,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     overlay.appendChild(fullImg);
     document.body.appendChild(overlay);
 
+    // Close overlay when clicked
     overlay.addEventListener("click", () => overlay.remove());
   }
 });

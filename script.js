@@ -12,29 +12,16 @@ function openSubsection(subsection) {
   // Open the gallery modal
   document.getElementById('gallery-modal').style.display = 'flex';
 
+  // Generate image gallery dynamically for the subsection
+  const images = [];
+  for (let i = 1; i <= 100; i++) {
+    images.push(`${i}.jpg`);
+  }
+
   // Set gallery images based on subsection
-  const galleryImages = {
-    bugatti: ['1.jpg', '2.jpg', '3.jpg'],
-    koenigsegg: ['1.jpg', '2.jpg', '3.jpg'],
-    veneno: ['1.jpg', '2.jpg', '3.jpg'],
-    arknights: ['1.jpg', '2.jpg', '3.jpg'],
-    deadbydaylight: ['1.jpg', '2.jpg', '3.jpg'],
-    genshin: ['1.jpg', '2.jpg', '3.jpg'],
-    pubg: ['1.jpg', '2.jpg', '3.jpg'],
-    wuthering: ['1.jpg', '2.jpg', '3.jpg'],
-    anastasia: ['1.jpg', '2.jpg', '3.jpg'],
-    barbra: ['1.jpg', '2.jpg', '3.jpg'],
-    elina: ['1.jpg', '2.jpg', '3.jpg'],
-    kristina: ['1.jpg', '2.jpg', '3.jpg'],
-    mckenna: ['1.jpg', '2.jpg', '3.jpg']
-  };
-
-  const images = galleryImages[subsection];
-
-  let galleryHTML = '';
-  images.forEach(img => {
-    galleryHTML += `<img src="images/${subsection}/${img}" alt="${subsection}">`;
-  });
+  const galleryHTML = images.map(img => {
+    return `<img src="images/${subsection}/${img}" alt="${subsection} ${img}" class="gallery-image">`;
+  }).join('');
 
   document.getElementById('gallery-images').innerHTML = galleryHTML;
 }
